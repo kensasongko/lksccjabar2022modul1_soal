@@ -48,8 +48,10 @@ Tahun 2022\\
 \vspace{30mm} %5mm vertical space
 {\LARGE Bidang Lomba Cloud Computing}
 
-\raggedright
+\thispagestyle{empty}
 \newpage
+\raggedright
+\pagenumbering{arabic}
 
 \section{Overview}
 You have been tasked to deploy an API on AWS. The REST API is built using AWS serverless architecture. The data will be stored in DynamoDB. The solution requires to use a custom domain and an SSL.
@@ -114,32 +116,32 @@ You have been tasked to deploy an API on AWS. The REST API is built using AWS se
       \item Stage Name: prod
       \item X-Ray tracing: enabled
   \end{itemize}
-  \item Create a usage plan to limit request to the prod stage with the following specifications:
+  \item Create a Usage Plan in API Gateway to limit request to the prod stage with the following specifications:
   \begin{itemize}
       \item Rate: 5 requests per second
       \item Burst: 10
       \item Quota: 1000 request per day
   \end{itemize}
-  \item Create a new API key.
-  \item Apply the usage plan to the API key.
-  \item Configure API Gateway to use custom domain modul1.[YOUR\_DOMAIN]. The domain must be hosted in Route 53.
+  \item Create a new API Key in API Gateway.
+  \item Apply the Usage Plan to the API Key.
   \item Create a certificate in ACM with the following specifications:
   \begin{itemize}
       \item Domain Name: modul1.[YOUR\_DOMAIN]
       \item Validation Method: DNS validation
       \item Tags: Key=LKS-ID, Value=MODUL1
   \end{itemize}
+  \item Configure the API in the API Gateway to use custom domain with the format modul1.[YOUR\_DOMAIN]. The domain must be hosted in Route 53. 
   \item Using any REST-API-capable client (e.g., curl, Postman), ensure you can access the API using the API key you generated. Make sure the throttling works as expected.\\
   Example: 
   \begin{lstlisting}[style=bashStyle]
   $ curl -X POST \
-  https://modul1.[YOUR_DOMAIN]/prod/todos \
+  https://modul1.[YOUR_DOMAIN]/todos \
   -H "x-api-key: [YOUR_API_KEY]" \
   -d '{"title":"First Entry", "message":"This is the first todo entry."}'
 
 
   $ curl -X GET \
-  https://modul1.[YOUR_DOMAIN]/prod/todos \
+  https://modul1.[YOUR_DOMAIN]/todos \
   -H "x-api-key: [YOUR_API_KEY]"
   \end{lstlisting}
 \end{enumerate}
